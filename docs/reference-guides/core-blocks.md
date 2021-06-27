@@ -780,7 +780,7 @@ Summarize your post with a list of headings. Add HTML anchors to Heading blocks 
 -	**Name:** core/table-of-contents
 -	**Category:** layout
 -	**Supports:** ~~html~~
--	**Attributes:** onlyIncludeCurrentPage
+-	**Attributes:** headings, onlyIncludeCurrentPage
 
 ## Tag Cloud
 
