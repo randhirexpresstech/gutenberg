@@ -189,13 +189,6 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 		}
 
 		foreach ( $webfont as $key => $value ) {
-
-			// Skip "provider", since it's for internal API use,
-			// and not a valid CSS property.
-			if ( 'provider' === $key ) {
-				continue;
-			}
-
 			// Compile the "src" parameter.
 			if ( 'src' === $key ) {
 				$value = $this->compile_src( $webfont['font-family'], $value );

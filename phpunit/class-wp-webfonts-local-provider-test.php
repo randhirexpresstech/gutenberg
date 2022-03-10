@@ -53,7 +53,6 @@ class WP_Webfonts_Provider_Local_Test extends WP_UnitTestCase {
 	public function test_set_webfonts() {
 		$webfonts = array(
 			'source-serif-pro-200-900-normal-local' => array(
-				'provider'     => 'local',
 				'font-family'  => 'Source Serif Pro',
 				'font-style'   => 'normal',
 				'font-weight'  => '200 900',
@@ -61,7 +60,6 @@ class WP_Webfonts_Provider_Local_Test extends WP_UnitTestCase {
 				'src'          => 'https://example.com/assets/fonts/source-serif-pro/SourceSerif4Variable-Roman.ttf.woff2',
 			),
 			'source-serif-pro-200-900-italic-local' => array(
-				'provider'     => 'local',
 				'font-family'  => 'Source Serif Pro',
 				'font-style'   => 'italic',
 				'font-weight'  => '200 900',
@@ -101,7 +99,6 @@ class WP_Webfonts_Provider_Local_Test extends WP_UnitTestCase {
 			'truetype format' => array(
 				'webfonts' => array(
 					'open-sans-bold-italic-local' => array(
-						'provider'    => 'local',
 						'font-family' => 'Open Sans',
 						'font-style'  => 'italic',
 						'font-weight' => 'bold',
@@ -116,7 +113,6 @@ CSS
 			'woff2 format'    => array(
 				'webfonts' => array(
 					'source-serif-pro-200-900-normal-local' => array(
-						'provider'     => 'local',
 						'font-family'  => 'Source Serif Pro',
 						'font-style'   => 'normal',
 						'font-weight'  => '200 900',
@@ -124,7 +120,6 @@ CSS
 						'src'          => 'http://example.org/assets/fonts/source-serif-pro/SourceSerif4Variable-Roman.ttf.woff2',
 					),
 					'source-serif-pro-400-900-italic-local' => array(
-						'provider'     => 'local',
 						'font-family'  => 'Source Serif Pro',
 						'font-style'   => 'italic',
 						'font-weight'  => '200 900',

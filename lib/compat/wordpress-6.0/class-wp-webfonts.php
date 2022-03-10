@@ -35,6 +35,25 @@ class WP_Webfonts {
 	 */
 	private $stylesheet_handle = '';
 
+	private static $valid_webfont_props = array(
+		'ascend-override',
+		'descend-override',
+		'font-display',
+		'font-family',
+		'font-stretch',
+		'font-style',
+		'font-weight',
+		'font-variant',
+		'font-feature-settings',
+		'font-variation-settings',
+		'line-gap-override',
+		'size-adjust',
+		'src',
+		'unicode-range',
+	);
+
+	private static $internal_webfont_props = array( 'id', 'provider' );
+
 	/**
 	 * Init.
 	 */
@@ -157,29 +176,8 @@ class WP_Webfonts {
 			$font['font-display'] = 'fallback';
 		}
 
-		$valid_props = array(
-			'ascend-override',
-			'descend-override',
-			'font-display',
-			'font-family',
-			'font-stretch',
-			'font-style',
-			'font-weight',
-			'font-variant',
-			'font-feature-settings',
-			'font-variation-settings',
-			'line-gap-override',
-			'size-adjust',
-			'src',
-			'unicode-range',
-
-			// Exceptions.
-			'id',
-			'provider',
-		);
-
 		foreach ( $font as $prop => $value ) {
-			if ( ! in_array( $prop, $valid_props, true ) ) {
+			if ( ! in_array( $prop, self::$valid_webfont_props, true ) && ! in_array( $prop, self::$internal_webfont_props, true ) ) {
 				unset( $font[ $prop ] );
 			}
 		}
@@ -285,12 +283,19 @@ class WP_Webfonts {
 				continue;
 			}
 
+			$provider_webfonts_without_internal_webfont_props = array_map(
+				function( $webfont ) {
+					return array_diff_key( $webfont, array_flip( self::$internal_webfont_props ) );
+				},
+				$provider_webfonts
+			);
+
 			/*
 			 * Process the webfonts by first passing them to the provider via `set_webfonts()`
 			 * and then getting the CSS from the provider.
 			 */
 			$provider = new $provider_class();
-			$provider->set_webfonts( $provider_webfonts );
+			$provider->set_webfonts( $provider_webfonts_without_internal_webfont_props );
 			$styles .= $provider->get_css();
 		}
 
