@@ -5,7 +5,6 @@
  * @covers WP_Webfonts_Test
  */
 class WP_Webfonts_Test extends WP_UnitTestCase {
-
 	/**
 	 * @covers wp_register_webfonts
 	 * @covers WP_Webfonts::register_font
@@ -35,8 +34,8 @@ class WP_Webfonts_Test extends WP_UnitTestCase {
 		);
 
 		$expected = array(
-			'source-serif-pro-200-900-normal-local' => $fonts[0],
-			'source-serif-pro-200-900-italic-local' => $fonts[1],
+			'source-serif-pro-200-900-normal-local' => array_merge( $fonts[0], array( 'id' => 'source-serif-pro-200-900-normal-local' ) ),
+			'source-serif-pro-200-900-italic-local' => array_merge( $fonts[1], array( 'id' => 'source-serif-pro-200-900-italic-local' ) ),
 		);
 
 		wp_register_webfonts( $fonts );

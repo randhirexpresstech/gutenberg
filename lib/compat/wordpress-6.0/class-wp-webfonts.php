@@ -83,8 +83,11 @@ class WP_Webfonts {
 	public function register_font( $font ) {
 		$font = $this->validate_font( $font );
 		if ( $font ) {
-			$id                    = $this->get_font_id( $font );
-			self::$webfonts[ $id ] = $font;
+			if ( ! isset( $font['id'] ) || empty( $font['id'] ) ) {
+				$font['id'] = $this->get_font_id( $font );
+			}
+
+			self::$webfonts[ $font['id'] ] = $font;
 		}
 	}
 
@@ -109,6 +112,7 @@ class WP_Webfonts {
 		$font = wp_parse_args(
 			$font,
 			array(
+				'id'           => '',
 				'provider'     => 'local',
 				'font-family'  => '',
 				'font-style'   => 'normal',
@@ -170,6 +174,7 @@ class WP_Webfonts {
 			'unicode-range',
 
 			// Exceptions.
+			'id',
 			'provider',
 		);
 
