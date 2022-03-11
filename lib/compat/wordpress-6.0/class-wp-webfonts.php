@@ -52,6 +52,7 @@ class WP_Webfonts {
 		'unicode-range',
 	);
 
+	// These properties are only referenced within the class, not externally like the props above.
 	private static $internal_webfont_props = array( 'id', 'provider' );
 
 	/**
