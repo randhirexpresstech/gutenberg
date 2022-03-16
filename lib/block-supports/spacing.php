@@ -83,11 +83,11 @@ function gutenberg_apply_spacing_support( $block_type, $block_attributes ) {
 	$attributes = array();
 
 	if ( ! empty( $classes ) ) {
-		$attributes['class'] = implode( ' ', $classes );
+		$attributes['class'] = implode( ' ', array_filter( $classes ) );
 	}
 
 	if ( ! empty( $styles ) ) {
-		$attributes['style'] = implode( ' ', $styles );
+		$attributes['style'] = implode( ' ', array_filter( $styles ) );
 	}
 
 	return $attributes;
