@@ -159,12 +159,12 @@ class WP_Style_Engine_Gutenberg {
 	 * @param string|array $style_value A single raw Gutenberg style attributes value for a CSS property.
 	 * @param array        $path        An array of strings representing a path to the style value.
 	 *
-	 * @return array The class name for the added style.
+	 * @return array A CSS ruleset compatible with add_style().
 	 */
 	protected function get_block_style_css_rules( $style_value, $path ) {
 		$style_definition = _wp_array_get( static::BLOCK_STYLE_DEFINITIONS_METADATA, $path, null );
 
-		if ( $style_definition ) {
+		if ( ! empty( $style_definition ) ) {
 			if (
 				isset( $style_definition['value_func'] ) &&
 				is_callable( $style_definition['value_func'] )
