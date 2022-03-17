@@ -37,17 +37,22 @@ class WP_Style_Engine_Gutenberg {
 
 	/**
 	 * Style definitions that contain the instructions to
-	 * parse/output valid Gutenberg styles.
+	 * parse/output valid Gutenberg styles from a block's attributes.
+	 * For every style definition, the follow properties are valid:
+	 *
+	 *  - property_key => the key that represents a valid CSS property, e.g., "margin" or "border".
+	 *  - value_func   => a function to generate an array of valid CSS rules for a particular style object.
+	 *                    For example, `'padding' => 'array( 'top' => '1em' )` will return `array( 'padding-top' => '1em' )`
 	 */
 	const BLOCK_STYLE_DEFINITIONS_METADATA = array(
 		'spacing' => array(
 			'padding' => array(
-				'value_key'  => 'padding',
-				'value_func' => 'gutenberg_get_style_engine_css_box_rules',
+				'property_key' => 'padding',
+				'value_func'   => 'gutenberg_get_style_engine_css_box_rules',
 			),
 			'margin'  => array(
-				'value_key'  => 'margin',
-				'value_func' => 'gutenberg_get_style_engine_css_box_rules',
+				'property_key' => 'margin',
+				'value_func'   => 'gutenberg_get_style_engine_css_box_rules',
 			),
 		),
 	);
@@ -159,7 +164,7 @@ class WP_Style_Engine_Gutenberg {
 				isset( $style_definition['value_func'] ) &&
 				is_callable( $style_definition['value_func'] )
 			) {
-				return call_user_func( $style_definition['value_func'], $style_value, $style_definition['value_key'] );
+				return call_user_func( $style_definition['value_func'], $style_value, $style_definition['property_key'] );
 			}
 		}
 
