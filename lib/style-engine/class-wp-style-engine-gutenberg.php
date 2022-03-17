@@ -119,9 +119,16 @@ class WP_Style_Engine_Gutenberg {
 
 	/**
 	 * Stores style rules for a given CSS selector (the key) and returns an associated classname.
+	 * Accepts an array of options, rules, and selector for constructing the rules.
 	 *
 	 * @param string $key     A class name used to construct a key.
-	 * @param array  $options An array of options, rules, and selector for constructing the rules.
+	 * @param array  $options = array(
+	 *        'prefix'    => (string) An optional beginning classname fragment, such as selector syntax, e.g., `#`
+	 *        'suffix'    => (string) An optional ending classname fragment.
+	 *        'selector'  => (string) An optional CSS selector for specificity, e.g., `> p`.
+	 *        'rules'     => (array) An array of valid CSS rules, e.g., array( 'padding-top' => '1em', 'color' => 'pink' ).
+	 *        'obfuscate' => (boolean) Whether to hash the classname.
+	 *     );.
 	 *
 	 * @return string The class name for the added style.
 	 */
@@ -138,8 +145,6 @@ class WP_Style_Engine_Gutenberg {
 		if ( ! empty( $options['obfuscate'] ) && true === $options['obfuscate'] ) {
 			// Generate a consistent, obfuscated key by hashing a unique class based on the rules.
 			// Outputs something like .wp-my-key__002d308c.
-			// Will we ever need to decode/decrypt the classname?
-			// If so, look at openssl_encrypt().
 			$class = $key . '__' . hash( 'crc32', $class );
 		}
 
