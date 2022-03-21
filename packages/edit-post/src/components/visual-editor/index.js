@@ -237,7 +237,10 @@ export default function VisualEditor( { styles } ) {
 							/>
 						) }
 						{ ! isTemplateMode && (
-							<div className="edit-post-visual-editor__post-title-wrapper">
+							<div
+								className="edit-post-visual-editor__post-title-wrapper"
+								contentEditable={ false }
+							>
 								<PostTitle />
 							</div>
 						) }
